@@ -15,5 +15,5 @@ def client():
 # Restore in-memory store to its original state before every test
 @pytest.fixture(autouse=True)
 def reset_activities():
-    for name, data in _initial_activities.items():
-        activities[name] = copy.deepcopy(data)
+    activities.clear()
+    activities.update(copy.deepcopy(_initial_activities))
