@@ -24,7 +24,10 @@ def test_get_activities_returns_expected_structure(client: TestClient):
     response = client.get("/activities")
 
     # Assert
-    activity = next(iter(response.json().values()))
+    assert response.status_code == 200
+    payload = response.json()
+    assert len(payload) > 0
+    activity = next(iter(payload.values()))
     assert "description" in activity
     assert "schedule" in activity
     assert "max_participants" in activity
